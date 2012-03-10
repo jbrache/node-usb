@@ -86,7 +86,7 @@
 				data->Set(Uint32::New(i), Uint32::New(control_transfer_req->data[i])); \
 			} \
 			argv[0] = data; \
-			argv[2] = Local<Value>::New(scope.Close(error)); \
+			argv[1] = Local<Value>::New(scope.Close(error)); \
 			TryCatch try_catch; \
 			VARNAME->callback->Call(Context::GetCurrent()->Global(), 2, argv); \
 			if (try_catch.HasCaught()) { \
