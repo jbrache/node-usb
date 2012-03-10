@@ -2,8 +2,38 @@ libusb-1.0 bindings for Node.js
 ==============================
 node-usb binds libusb-1.0 to Node.js 
 
-Tested with Node version 0.2.4/Linux.
-Brew/OSX port of libusb-1.0 has still an issue which results in a segfault. Try using the latest development branch from http://git.libusb.org
+Testing the node-usb addon with the beagleboard.
+
+At the time of this writing, the beagleboard runs on the the linux Angstrom distribution with:
+node js version v0.4.12
+
+Forked from: https://github.com/schakko/node-usb (original creator: Christopher Klein <ckl[at]ecw[dot]de>)
+
+Using commit a91ce85870d9fd263bc2d2dc04ecfb53e83f1504 as the start for this fork.
+Had to use that commit point because the beagleboard does not come installed with libuv (used in the current master). Not quite sure how to install libuv on the beagleboard correctly, especially with the older version of node - v0.4.12 installed on the beagleboard.
+
+To get this addon to work on the beaglebone, connect to the beaglebone through the serial console or through ssh and run complete the following steps:
+
+beagleboard setup
+==============================
+The following instructions assume the image installed on the beagleboard is:
+the Rev A5 Production 02-14-12 production image:
+http://circuitco.com/support/index.php?title=BeagleBone
+
+Which can be downloaded from:
+http://circuitco.com/support/files/BeagleBone-A5/BeagleBone_Rev_A5_Production_02_14_2012.7z
+
+1. Install Libusb-dev:
+# opkg update
+# opkg install libusb-1.0-dev
+
+2. Install NPM <- OPTIONAL, not needed but nice to have, otherwise skip to step 3
+
+3. Go to the Cloud9 workspace to install the node-usb package
+# cd /var/lib/cloud9/node_modules
+# git clone git://github.com/jbrache/node-usb.git
+# cd node-usb
+# make
 
 Installation
 ==============================
@@ -121,9 +151,3 @@ If you own a Microsoft Kinect, you can manipulate the LED and motor tilt by typi
 Browse to localhost:8080 and see the magic.
 
 If you have permission issues, you have to add the proper rights to the USB device or execute the examples as root (NOT RECOMMENDED!)
-
-More information
-==============================
-Christopher Klein <ckl[at]ecw[dot]de>
-http://twitter.com/schakko
-http://wap.ecw.de
