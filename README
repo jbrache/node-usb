@@ -2,22 +2,25 @@ libusb-1.0 bindings for Node.js
 ==============================
 node-usb binds libusb-1.0 to Node.js 
 
-Testing the node-usb addon with the beaglebone.
+Testing the node-usb addon with the beaglebone (http://beagleboard.org/static/beaglebone/latest/README.htm).
 
 At the time of this writing, the beaglebone runs on the the linux Angstrom distribution with:
 * node js version v0.4.12
 
-Forked from: https://github.com/schakko/node-usb (original creator: Christopher Klein <ckl[at]ecw[dot]de>)
+Forked node-usb from: https://github.com/schakko/node-usb (original creator: Christopher Klein <ckl[at]ecw[dot]de>)
 
-Using commit a91ce85870d9fd263bc2d2dc04ecfb53e83f1504 as the start for this fork.
-Had to use that commit point because the beaglebone does not come installed with libuv (used in the current master of node-js). 
-Not quite sure how to install libuv on the beaglebone correctly, especially with the older version of node - v0.4.12 installed on the beaglebone.
+Using commit a91ce85870d9fd263bc2d2dc04ecfb53e83f1504 as the beginning of this fork.
+Had to use that commit point because the beaglebone does not come installed with libuv (used in the current master of https://github.com/schakko/node-usb.git). 
+Not quite sure how to install libuv on the beaglebone correctly and add it as a dependency for node-usb, especially with the older version of node js - v0.4.12
+installed on the beaglebone.
+
+Installing a newer version of node js on the beaglebone breaks the Cloud9 IDE, so it's probably best to wait until those issues are resolved.
 
 To get this addon to work on the beaglebone, connect to the beaglebone through the serial console or through ssh and run complete the following steps:
 
 beagleboard setup
 ==============================
-The following instructions assume the image installed on the beagleboard is:
+The following instructions assume the image installed on the beaglebone is:
 * "The Rev A5 Production 02-14-12 production image"
 * http://circuitco.com/support/index.php?title=BeagleBone
 
@@ -38,13 +41,7 @@ Installation
 # git clone git://github.com/jbrache/node-usb.git
 # cd node-usb
 
-2. You can check it out directly (Step 3 can be skipped if you don't plan on modifying this branch):
-# git checkout origin/node-usb-beaglebone
-
-3. But if you want to work on that branch, you'll need to create a local tracking branch:
-# git checkout -b node-usb-beaglebone origin/node-usb-beaglebone
-
-4. This is important, running make:
+2. This is important, running make:
 # make
 in current directory and wait. "Unit tests" are automatically executed by default target.
 
