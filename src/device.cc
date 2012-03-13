@@ -397,7 +397,17 @@ namespace NodeUsb {
 		}
 	}
 
+<<<<<<< HEAD
 	void Device::EIO_After_ControlTransfer(uv_work_t *req) {
+=======
+	int Device::EIO_After_ControlTransfer(eio_req *req) {
+		// TODO: Not a big fan of the macro below. Modified te macro in bindings.h below so that it passes the callback the data
+		// from a control transfer. In the future it may make more sense to expose the macro in this function.
+		// 
+		// May also need to add the logic if an array is passed in to the control transfer function, don't return any data.
+		// If an integer is passed in the control transfer function then return back data to the callback.
+		// Right now, the callback function always returns the control transfer data packet.
+>>>>>>> node-usb-beaglebone
 		TRANSFER_REQUEST_FREE(control_transfer_request, device)
 	}
 }

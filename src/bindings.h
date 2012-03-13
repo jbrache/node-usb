@@ -80,15 +80,21 @@
 		uv_unref(uv_default_loop()); \
 		if (!VARNAME->callback.IsEmpty()) { \
 			HandleScope scope; \
+			control_transfer_request *control_transfer_req = static_cast<control_transfer_request *>(req->data); \
 			Handle<Object> error = Object::New(); \
 			if(VARNAME->errsource) { \
 				error->Set(V8SYM("error_source"), V8STR(VARNAME->errsource)); \
 			} \
 	                error->Set(V8SYM("error_code"), Uint32::New(VARNAME->errcode)); \
-			Local<Value> argv[1]; \
-			argv[0] = Local<Value>::New(scope.Close(error)); \
+			Local<Value> argv[2]; \
+			Local<Array> data = Array::New(control_transfer_req->wLength); \
+			for(int i = 0; i < control_transfer_req->wLength; i++) { \
+				data->Set(Uint32::New(i), Uint32::New(control_transfer_req->data[i])); \
+			} \
+			argv[0] = data; \
+			argv[1] = Local<Value>::New(scope.Close(error)); \
 			TryCatch try_catch; \
-			VARNAME->callback->Call(Context::GetCurrent()->Global(), 1, argv); \
+			VARNAME->callback->Call(Context::GetCurrent()->Global(), 2, argv); \
 			if (try_catch.HasCaught()) { \
 				FatalException(try_catch); \
 			} \
